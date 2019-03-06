@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class UIBehaviour : MonoBehaviour {
 
     public Transform arrow;
-    public BallBehaviour game;
+    public GameMaster game;
 
     public Text countdownText;
     public Text restart;
@@ -20,7 +20,7 @@ public class UIBehaviour : MonoBehaviour {
 
     private float timeCounter = 0f;
 
-    private void Start()
+    public void CustomStart()
     {
         restart.gameObject.SetActive(false);
         gameOverText.gameObject.SetActive(false);
@@ -30,7 +30,7 @@ public class UIBehaviour : MonoBehaviour {
 }
 
     // Update is called once per frame
-    void Update ()
+    public void CustomUpdate ()
     {
         timeCounter += Time.deltaTime;
 

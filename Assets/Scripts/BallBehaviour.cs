@@ -4,28 +4,20 @@ using UnityEngine;
 
 public class BallBehaviour : MonoBehaviour
 {
-    public bool gameOver;
-    public bool youWin;
+    public GameMaster game;
 
     public Collider GOCollider;
     public Collider GWCollider;
-	
-	// Update is called once per frame
-	void Start ()
-    {
-        gameOver = false;
-        youWin = false;
-	}
 
     public void OnTriggerEnter(Collider other)
     {
-        if (other == GOCollider && !youWin)
+        if (other == GOCollider && !game.youWin)
         {
-            gameOver = true;
+            game.gameOver = true;
         }
-        else if (other == GWCollider && !gameOver)
+        else if (other == GWCollider && !game.gameOver)
         {
-            youWin = true;
+            game.youWin = true;
         }
     }
 }

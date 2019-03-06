@@ -4,20 +4,20 @@ using UnityEngine;
 
 public class BoardBehaviour : MonoBehaviour
 {
-    public BallBehaviour game;
+    public GameMaster game;
     
     float rotationX = 0f;
     float rotationY = 0f;
     float speed = 20f;
     
 	// Use this for initialization
-	void Start ()
+	public void CustomStart ()
     {
         Cursor.lockState = CursorLockMode.Locked;
     }
 	
 	// Update is called once per frame
-	void Update ()
+	public void CustomUpdate ()
     {
         if (!game.gameOver && !game.youWin)
         {

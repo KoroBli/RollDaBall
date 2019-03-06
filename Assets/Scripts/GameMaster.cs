@@ -5,19 +5,55 @@ using UnityEngine.SceneManagement;
 
 public class GameMaster : MonoBehaviour
 {
-    public BallBehaviour game;
-	
-	// Update is called once per frame
-	void Update ()
+    public BoardBehaviour board;
+    public UIBehaviour ui;
+
+    public bool pause;
+    public bool gameOver;
+    public bool youWin;
+
+    // Update is called once per frame
+    void Start()
     {
-		if(game.gameOver || game.youWin)
+        gameOver = false;
+        youWin = false;
+        pause = false;
+
+        board.CustomStart();
+        ui.CustomStart();
+    }
+
+    // Update is called once per frame
+    void Update ()
+    {
+        if (Input.GetKeyDown(KeyCode.Pause) && (!gameOver && !youWin)) pause = !pause;
+
+        if (pause) Pause();
+        else Resume();
+
+        if (!gameOver && !youWin)
         {
-            if(Input.GetButtonDown("Restart"))
+            board.CustomUpdate();
+            ui.CustomUpdate();
+        }
+        else
+        {
+            if (Input.GetButtonDown("Restart"))
             {
-                SceneManager.LoadScene(0);
-                game.gameOver = false;
-                game.youWin = false;
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+                gameOver = false;
+                youWin = false;
             }
         }
 	}
+
+    public void Resume()
+    {
+        Time.timeScale = 1f;
+    }
+
+    public void Pause()
+    {
+        Time.timeScale = 0f;
+    }
 }
