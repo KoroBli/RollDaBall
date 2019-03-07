@@ -37,6 +37,19 @@ public class GameMaster : MonoBehaviour
             Resume();
         }
 
+        if(Input.GetKeyDown(KeyCode.RightArrow))
+        {
+            if(SceneManager.GetActiveScene().buildIndex >= SceneManager.sceneCountInBuildSettings - 1)
+            {
+                Cursor.lockState = CursorLockMode.None;
+                SceneManager.LoadScene(0);
+            }
+            else
+            {
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            }
+        }
+
         ui.CustomUpdate();
 
         if (!gameOver && !youWin)
