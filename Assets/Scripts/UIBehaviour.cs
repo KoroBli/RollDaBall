@@ -7,13 +7,12 @@ public class UIBehaviour : MonoBehaviour {
 
     public Transform arrow;
     public GameMaster game;
+    public GameObject win;
+    public GameObject lose;
+    public GameObject pause;
 
     public Text countdownText;
     public Text restart;
-    public Text gameOverText;
-    public Text congratsText;
-    public Image gameOverImage;
-    public Image winImage;
 
     private int direction = 1;
     private int speed = 5;
@@ -23,11 +22,10 @@ public class UIBehaviour : MonoBehaviour {
     public void CustomStart()
     {
         restart.gameObject.SetActive(false);
-        gameOverText.gameObject.SetActive(false);
-        congratsText.gameObject.SetActive(false);
-        gameOverImage.gameObject.SetActive(false);
-        winImage.gameObject.SetActive(false);
-}
+        win.gameObject.SetActive(false);
+        lose.gameObject.SetActive(false);
+        pause.gameObject.SetActive(false);
+    }
 
     // Update is called once per frame
     public void CustomUpdate ()
@@ -42,16 +40,13 @@ public class UIBehaviour : MonoBehaviour {
 
         if(game.gameOver)
         {
+            lose.gameObject.SetActive(true);
             restart.gameObject.SetActive(true);
-            gameOverText.gameObject.SetActive(true);
-            gameOverImage.gameObject.SetActive(true);
         }
-
-        if(game.youWin)
+        else if(game.youWin)
         {
+            win.gameObject.SetActive(true);
             restart.gameObject.SetActive(true);
-            congratsText.gameObject.SetActive(true);
-            winImage.gameObject.SetActive(true);
         }
     }
 }

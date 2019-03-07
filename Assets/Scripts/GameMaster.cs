@@ -26,34 +26,55 @@ public class GameMaster : MonoBehaviour
     // Update is called once per frame
     void Update ()
     {
-        if (Input.GetKeyDown(KeyCode.Pause) && (!gameOver && !youWin)) pause = !pause;
+        if (Input.GetButtonDown("Jump") && (!gameOver && !youWin)) pause = !pause;
 
-        if (pause) Pause();
-        else Resume();
+        if (pause)
+        {
+            Pause();
+        }
+        else
+        {
+            Resume();
+        }
+
+        ui.CustomUpdate();
 
         if (!gameOver && !youWin)
         {
             board.CustomUpdate();
-            ui.CustomUpdate();
         }
-        else
+
+        if (SceneManager.GetActiveScene().buildIndex != 0 && Input.GetButtonDown("Restart"))
         {
-            if (Input.GetButtonDown("Restart"))
-            {
-                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-                gameOver = false;
-                youWin = false;
-            }
+            ResetScene();
         }
-	}
+    }
 
     public void Resume()
     {
         Time.timeScale = 1f;
+        ui.pause.gameObject.SetActive(false);
+        Cursor.lockState = CursorLockMode.Locked;
+        pause = false;
     }
 
     public void Pause()
     {
         Time.timeScale = 0f;
+        ui.pause.gameObject.SetActive(true);
+        Cursor.lockState = CursorLockMode.None;
+    }
+
+    public void QuitToMenu()
+    {
+        SceneManager.LoadScene(0);
+    }
+
+    public void ResetScene()
+    {
+        gameOver = false;
+        youWin = false;
+        pause = false;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }
