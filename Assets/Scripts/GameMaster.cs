@@ -42,6 +42,7 @@ public class GameMaster : MonoBehaviour
             if(SceneManager.GetActiveScene().buildIndex >= SceneManager.sceneCountInBuildSettings - 1)
             {
                 Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
                 SceneManager.LoadScene(0);
             }
             else
@@ -68,6 +69,7 @@ public class GameMaster : MonoBehaviour
         Time.timeScale = 1f;
         ui.pause.gameObject.SetActive(false);
         Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
         pause = false;
     }
 
@@ -76,6 +78,7 @@ public class GameMaster : MonoBehaviour
         Time.timeScale = 0f;
         ui.pause.gameObject.SetActive(true);
         Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
 
     public void QuitToMenu()
