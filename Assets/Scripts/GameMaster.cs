@@ -39,16 +39,7 @@ public class GameMaster : MonoBehaviour
 
         if(Input.GetKeyDown(KeyCode.RightArrow))
         {
-            if(SceneManager.GetActiveScene().buildIndex >= SceneManager.sceneCountInBuildSettings - 1)
-            {
-                Cursor.lockState = CursorLockMode.None;
-                Cursor.visible = true;
-                SceneManager.LoadScene(0);
-            }
-            else
-            {
-                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-            }
+            NextScene();
         }
 
         ui.CustomUpdate();
@@ -61,6 +52,10 @@ public class GameMaster : MonoBehaviour
         if (SceneManager.GetActiveScene().buildIndex != 0 && Input.GetButtonDown("Restart"))
         {
             ResetScene();
+        }
+        else if(SceneManager.GetActiveScene().buildIndex != 0 && Input.GetButtonDown("Advance"))
+        {
+            NextScene();
         }
     }
 
@@ -92,5 +87,19 @@ public class GameMaster : MonoBehaviour
         youWin = false;
         pause = false;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    public void NextScene()
+    {
+        if (SceneManager.GetActiveScene().buildIndex >= SceneManager.sceneCountInBuildSettings - 1)
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+            SceneManager.LoadScene(0);
+        }
+        else
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        }
     }
 }

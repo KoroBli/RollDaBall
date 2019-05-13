@@ -13,6 +13,7 @@ public class UIBehaviour : MonoBehaviour {
 
     public Text countdownText;
     public Text restart;
+    public Text advance;
 
     private int direction = 1;
     private int speed = 5;
@@ -22,6 +23,7 @@ public class UIBehaviour : MonoBehaviour {
     public void CustomStart()
     {
         restart.gameObject.SetActive(false);
+        advance.gameObject.SetActive(false);
         win.gameObject.SetActive(false);
         lose.gameObject.SetActive(false);
         pause.gameObject.SetActive(false);
@@ -47,6 +49,7 @@ public class UIBehaviour : MonoBehaviour {
         {
             win.gameObject.SetActive(true);
             restart.gameObject.SetActive(true);
+            advance.gameObject.SetActive(true);
         }
     }
 }
